@@ -1,5 +1,3 @@
-import { loadFFmpeg } from "./ffmpeg.js";
-
 const videoInput = document.getElementById("videoInput");
 const fileName = document.getElementById("fileName");
 const videoPreview = document.getElementById("videoPreview");
@@ -7,6 +5,10 @@ const processBtn = document.getElementById("processBtn");
 const status = document.getElementById("status");
 
 let selectedFile = null;
+
+if (!videoInput) {
+  alert("لم يتم العثور على زر اختيار الفيديو");
+}
 
 videoInput.addEventListener("change", function (event) {
 
@@ -34,7 +36,7 @@ videoInput.addEventListener("change", function (event) {
 
 });
 
-processBtn.addEventListener("click", async function () {
+processBtn.addEventListener("click", function () {
 
   if (!selectedFile) {
 
@@ -45,23 +47,7 @@ processBtn.addEventListener("click", async function () {
 
   }
 
-  try {
-
-    status.textContent =
-      "جاري تحميل FFmpeg...";
-
-    await loadFFmpeg();
-
-    status.textContent =
-      "تم تحميل FFmpeg بنجاح ✅";
-
-  } catch (error) {
-
-    console.error(error);
-
-    status.textContent =
-      "فشل تحميل FFmpeg ❌";
-
-  }
+  status.textContent =
+    "الفيديو جاهز للمعالجة";
 
 });
