@@ -1,4 +1,4 @@
-import { pipeline } from "https://cdn.jsdelivr.net/npm/@huggingface/transformers";
+import { pipeline } from "https://cdn.jsdelivr.net/npm/@xenova/transformers";
 
 let recognizer = null;
 
@@ -22,4 +22,4 @@ export async function loadSpeechEngine(statusElement) {
     }
 
     return recognizer;
-}
+        }
