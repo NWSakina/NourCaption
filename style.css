@@ -4,8 +4,39 @@ body {
   margin-top: 40px;
 }
 
+#videoContainer {
+  position: relative;
+  display: inline-block;
+}
+
 video {
-  margin-top: 20px;
+  width: 320px;
   max-width: 90%;
   border-radius: 10px;
+}
+
+#textLayer {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px black;
+  display: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+#textInput {
+  width: 300px;
+  max-width: 90%;
+  padding: 8px;
+  margin-top: 15px;
+}
+
+button {
+  padding: 10px 18px;
+  margin-top: 10px;
+  cursor: pointer;
 }
