@@ -1,3 +1,5 @@
+import { loadSpeechEngine } from "./speech.js";
+
 const videoInput = document.getElementById("videoInput");
 const fileName = document.getElementById("fileName");
 const videoPreview = document.getElementById("videoPreview");
@@ -16,11 +18,9 @@ videoInput.addEventListener("change", function (event) {
 
     if (selectedFile) {
 
-        fileName.textContent =
-            "الفيديو المختار: " + selectedFile.name;
+        fileName.textContent = "الفيديو المختار: " + selectedFile.name;
 
-        status.textContent =
-            "تم اختيار الفيديو بنجاح";
+        status.textContent = "تم اختيار الفيديو بنجاح";
 
         const videoURL = URL.createObjectURL(selectedFile);
 
@@ -29,8 +29,7 @@ videoInput.addEventListener("change", function (event) {
 
     } else {
 
-        status.textContent =
-            "لم يتم اختيار ملف";
+        status.textContent = "لم يتم اختيار ملف";
 
     }
 
@@ -50,7 +49,7 @@ addTextBtn.addEventListener("click", function () {
 
 });
 
-processBtn.addEventListener("click", function () {
+processBtn.addEventListener("click", async function () {
 
     if (!selectedFile) {
 
@@ -59,7 +58,17 @@ processBtn.addEventListener("click", function () {
 
     }
 
-    status.textContent =
-        "سيتم إضافة حفظ الفيديو في الإصدار القادم";
+    try {
+
+        await loadSpeechEngine(status);
+
+    } catch (error) {
+
+        console.error(error);
+
+        status.textContent =
+            "فشل تحميل محرك التعرف على الكلام";
+
+    }
 
 });
