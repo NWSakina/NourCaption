@@ -1,4 +1,5 @@
 import { loadSpeechEngine } from "./speech.js";
+import { extractAudio } from "./audio.js";
 
 const videoInput = document.getElementById("videoInput");
 const fileName = document.getElementById("fileName");
@@ -18,9 +19,11 @@ videoInput.addEventListener("change", function (event) {
 
     if (selectedFile) {
 
-        fileName.textContent = "الفيديو المختار: " + selectedFile.name;
+        fileName.textContent =
+            "الفيديو المختار: " + selectedFile.name;
 
-        status.textContent = "تم اختيار الفيديو بنجاح";
+        status.textContent =
+            "تم اختيار الفيديو بنجاح";
 
         const videoURL = URL.createObjectURL(selectedFile);
 
@@ -29,7 +32,8 @@ videoInput.addEventListener("change", function (event) {
 
     } else {
 
-        status.textContent = "لم يتم اختيار ملف";
+        status.textContent =
+            "لم يتم اختيار ملف";
 
     }
 
@@ -60,14 +64,19 @@ processBtn.addEventListener("click", async function () {
 
     try {
 
+        status.textContent = "جاري تحميل محرك الكلام...";
+
         await loadSpeechEngine(status);
+
+        status.textContent = "جاري استخراج الصوت...";
+
+        await extractAudio(selectedFile);
+
+        status.textContent = "تم استخراج الصوت بنجاح";
 
     } catch (error) {
 
-        console.error(error);
-
-        status.textContent =
-            "فشل تحميل محرك التعرف على الكلام";
+        status.textContent = error.message;
 
     }
 
