@@ -9,24 +9,38 @@ const status = document.getElementById("status");
 let selectedFile = null;
 
 videoInput.addEventListener("change", function () {
+
   selectedFile = this.files[0];
 
   if (selectedFile) {
-    fileName.textContent = "الفيديو المختار: " + selectedFile.name;
+
+    fileName.textContent =
+      "الفيديو المختار: " + selectedFile.name;
 
     const videoURL = URL.createObjectURL(selectedFile);
+
     videoPreview.src = videoURL;
+    videoPreview.load();
+
+    status.textContent = "تم اختيار الفيديو";
+
   }
+
 });
+
 
 processBtn.addEventListener("click", async function () {
 
   if (!selectedFile) {
+
     status.textContent = "اختر فيديو أولًا";
     return;
+
   }
 
+
   try {
+
     status.textContent = "جاري تحميل المحرك...";
 
     await loadFFmpeg();
@@ -35,7 +49,9 @@ processBtn.addEventListener("click", async function () {
 
   } catch (error) {
 
-    status.textContent = "خطأ: " + error.message;
+    status.textContent =
+      "خطأ: " + error.message;
+
     console.error(error);
 
   }
