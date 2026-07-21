@@ -1,18 +1,33 @@
-import { createFFmpeg } from "https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js";
+import { FFmpeg } from "https://unpkg.com/@ffmpeg/ffmpeg@0.12.10/dist/esm/index.js";
+import { toBlobURL } from "https://unpkg.com/@ffmpeg/util@0.12.1/dist/esm/index.js";
 
-const ffmpeg = createFFmpeg({
-  log: true,
-  corePath:
-    "https://unpkg.com/@ffmpeg/core@0.11.0/dist/ffmpeg-core.js"
-});
+const ffmpeg = new FFmpeg();
+
+let loaded = false;
 
 export async function loadFFmpeg() {
 
-  if (!ffmpeg.isLoaded()) {
-    await ffmpeg.load();
-  }
+    if (loaded) {
+        return ffmpeg;
+    }
 
-  return ffmpeg;
+    const baseURL =
+        "https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm";
+
+    await ffmpeg.load({
+        coreURL: await toBlobURL(
+            `${baseURL}/ffmpeg-core.js`,
+            "text/javascript"
+        ),
+        wasmURL: await toBlobURL(
+            `${baseURL}/ffmpeg-core.wasm`,
+            "application/wasm"
+        )
+    });
+
+    loaded = true;
+
+    return ffmpeg;
 }
 
 export default ffmpeg;
