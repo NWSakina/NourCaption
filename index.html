@@ -1,29 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NourCaption</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <h1>NourCaption</h1>
+<h1>NourCaption</h1>
 
-  <input id="videoInput" type="file" accept="video/*">
+<input id="videoInput" type="file" accept="video/*">
 
-  <p id="fileName">لم يتم اختيار فيديو</p>
+<p id="fileName">لم يتم اختيار فيديو</p>
 
-  <video id="videoPreview" controls width="320"></video>
+<div id="videoContainer">
 
-  <br><br>
+    <video id="videoPreview" controls></video>
 
-  <button id="processBtn">
-    معالجة الفيديو
-  </button>
+    <div id="textLayer">
+        النص التجريبي
+    </div>
 
-  <p id="status"></p>
+</div>
 
-  <script type="module" src="script.js"></script>
+<br>
+
+<input
+type="text"
+id="textInput"
+placeholder="اكتب النص هنا">
+
+<button id="addTextBtn">
+إضافة النص
+</button>
+
+<br><br>
+
+<button id="processBtn">
+معالجة الفيديو
+</button>
+
+<p id="status"></p>
+
+<script type="module" src="script.js"></script>
 
 </body>
-</html>
+  </html>
