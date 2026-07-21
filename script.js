@@ -4,50 +4,62 @@ const videoPreview = document.getElementById("videoPreview");
 const processBtn = document.getElementById("processBtn");
 const status = document.getElementById("status");
 
-let selectedFile = null;
+const textInput = document.getElementById("textInput");
+const addTextBtn = document.getElementById("addTextBtn");
+const textLayer = document.getElementById("textLayer");
 
-if (!videoInput) {
-  alert("لم يتم العثور على زر اختيار الفيديو");
-}
+let selectedFile = null;
 
 videoInput.addEventListener("change", function (event) {
 
-  selectedFile = event.target.files[0];
+    selectedFile = event.target.files[0];
 
-  if (selectedFile) {
+    if (selectedFile) {
 
-    fileName.textContent =
-      "الفيديو المختار: " + selectedFile.name;
+        fileName.textContent =
+            "الفيديو المختار: " + selectedFile.name;
 
-    status.textContent =
-      "تم اختيار الفيديو بنجاح";
+        status.textContent =
+            "تم اختيار الفيديو بنجاح";
 
-    const videoURL = URL.createObjectURL(selectedFile);
+        const videoURL = URL.createObjectURL(selectedFile);
 
-    videoPreview.src = videoURL;
-    videoPreview.controls = true;
+        videoPreview.src = videoURL;
+        videoPreview.controls = true;
 
-  } else {
+    } else {
 
-    status.textContent =
-      "لم يتم اختيار ملف";
+        status.textContent =
+            "لم يتم اختيار ملف";
 
-  }
+    }
+
+});
+
+addTextBtn.addEventListener("click", function () {
+
+    if (textInput.value.trim() === "") {
+
+        textLayer.style.display = "none";
+        return;
+
+    }
+
+    textLayer.textContent = textInput.value;
+    textLayer.style.display = "block";
 
 });
 
 processBtn.addEventListener("click", function () {
 
-  if (!selectedFile) {
+    if (!selectedFile) {
+
+        status.textContent = "اختر فيديو أولًا";
+        return;
+
+    }
 
     status.textContent =
-      "اختر فيديو أولًا";
-
-    return;
-
-  }
-
-  status.textContent =
-    "الفيديو جاهز للمعالجة";
+        "سيتم إضافة حفظ الفيديو في الإصدار القادم";
 
 });
