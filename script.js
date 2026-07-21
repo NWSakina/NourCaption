@@ -36,6 +36,7 @@ processBtn.addEventListener("click", async function () {
   } catch (error) {
 
     status.textContent = "خطأ: " + error.message;
+    console.error(error);
 
   }
 
