@@ -13,9 +13,7 @@ videoInput.addEventListener("change", function () {
 
   if (selectedFile) {
     fileName.textContent = "الفيديو المختار: " + selectedFile.name;
-
-    const videoURL = URL.createObjectURL(selectedFile);
-    videoPreview.src = videoURL;
+    videoPreview.src = URL.createObjectURL(selectedFile);
   }
 });
 
@@ -26,9 +24,16 @@ processBtn.addEventListener("click", async function () {
     return;
   }
 
-  status.textContent = "جاري تشغيل محرك المعالجة...";
+  try {
+    status.textContent = "1- بدأ التحميل...";
 
-  await ffmpeg.load();
+    await ffmpeg.load();
 
-  status.textContent = "المحرك جاهز";
+    status.textContent = "2- المحرك جاهز";
+
+  } catch (error) {
+    status.textContent = "حدث خطأ في تحميل المحرك";
+    console.log(error);
+  }
+
 });
