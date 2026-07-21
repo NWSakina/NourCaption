@@ -1,9 +1,16 @@
-const videoInput = document.querySelector('input[type="file"]');
+const videoInput = document.getElementById("videoInput");
+const fileName = document.getElementById("fileName");
 
 videoInput.addEventListener("change", function () {
   const file = this.files[0];
 
   if (file) {
-    alert("تم اختيار الفيديو: " + file.name);
+    fileName.textContent = "الفيديو المختار: " + file.name;
+  } else {
+    fileName.textContent = "لم يتم اختيار فيديو";
   }
 });
+
+function testApp() {
+  alert("NourCaption يعمل");
+}
