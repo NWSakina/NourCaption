@@ -1,4 +1,3 @@
-import ffmpeg from "./ffmpeg.js";
 import { loadFFmpeg } from "./ffmpeg.js";
 
 const videoInput = document.getElementById("videoInput");
@@ -36,8 +35,7 @@ processBtn.addEventListener("click", async function () {
 
   } catch (error) {
 
-    console.error(error);
-    status.textContent = "خطأ في تحميل المحرك";
+    status.textContent = "خطأ: " + error.message;
 
   }
 
