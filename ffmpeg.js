@@ -12,13 +12,7 @@ export async function loadFFmpeg() {
   const baseURL =
     "https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/esm";
 
-  const ffmpegWorker = await toBlobURL(
-    "https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.10/dist/esm/worker.js",
-    "text/javascript"
-  );
-
   await ffmpeg.load({
-    classWorkerURL: ffmpegWorker,
     coreURL: await toBlobURL(
       `${baseURL}/ffmpeg-core.js`,
       "text/javascript"
@@ -26,7 +20,7 @@ export async function loadFFmpeg() {
     wasmURL: await toBlobURL(
       `${baseURL}/ffmpeg-core.wasm`,
       "application/wasm"
-    ),
+    )
   });
 
   return ffmpeg;
