@@ -1,3 +1,6 @@
+import ffmpeg from "./ffmpeg.js";
+import { loadFFmpeg } from "./ffmpeg.js";
+
 const videoInput = document.getElementById("videoInput");
 const fileName = document.getElementById("fileName");
 const videoPreview = document.getElementById("videoPreview");
@@ -17,12 +20,25 @@ videoInput.addEventListener("change", function () {
   }
 });
 
-processBtn.addEventListener("click", function () {
+processBtn.addEventListener("click", async function () {
 
   if (!selectedFile) {
     status.textContent = "اختر فيديو أولًا";
     return;
   }
 
-  status.textContent = "جاري تجهيز الفيديو...";
+  try {
+    status.textContent = "جاري تحميل المحرك...";
+
+    await loadFFmpeg();
+
+    status.textContent = "المحرك جاهز";
+
+  } catch (error) {
+
+    console.error(error);
+    status.textContent = "خطأ في تحميل المحرك";
+
+  }
+
 });
