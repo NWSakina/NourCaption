@@ -1,4 +1,4 @@
-import { FFmpeg } from "https://unpkg.com/@ffmpeg/ffmpeg@0.12.10/dist/esm/index.js";
+import { FFmpeg } from "@ffmpeg/ffmpeg";
 
 let ffmpeg = null;
 
@@ -15,7 +15,7 @@ export async function loadFFmpeg() {
     await ffmpeg.load({
         coreURL: baseURL + "ffmpeg-core.js",
         wasmURL: baseURL + "ffmpeg-core.wasm",
-        workerURL: baseURL + "worker.js"
+        workerURL: baseURL + "ffmpeg-core.worker.js"
     });
 
     return ffmpeg;
