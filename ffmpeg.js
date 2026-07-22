@@ -4,7 +4,9 @@ let ffmpeg = null;
 
 export async function loadFFmpeg() {
 
-    if (ffmpeg) return ffmpeg;
+    if (ffmpeg) {
+        return ffmpeg;
+    }
 
     ffmpeg = new FFmpeg();
 
@@ -16,4 +18,4 @@ export async function loadFFmpeg() {
     return ffmpeg;
 }
 
-export default ffmpeg;
+export default loadFFmpeg;
