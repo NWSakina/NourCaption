@@ -4,19 +4,16 @@ let ffmpeg = null;
 
 export async function loadFFmpeg() {
 
-    if (ffmpeg) {
-        return ffmpeg;
-    }
+    if (ffmpeg) return ffmpeg;
 
     ffmpeg = new FFmpeg();
 
-    const baseURL = "./ffmpeg/";
-
     await ffmpeg.load({
-        coreURL: baseURL + "ffmpeg-core.js",
-        wasmURL: baseURL + "ffmpeg-core.wasm",
-        workerURL: baseURL + "worker.js"
+        coreURL: "./ffmpeg/ffmpeg-core.js",
+        wasmURL: "./ffmpeg/ffmpeg-core.wasm"
     });
 
     return ffmpeg;
 }
+
+export default ffmpeg;
