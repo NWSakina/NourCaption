@@ -1,4 +1,4 @@
-import { FFmpeg } from "https://unpkg.com/@ffmpeg/ffmpeg@0.12.10/dist/esm/index.js";
+import { FFmpeg } from "./ffmpeg-lib/index.js";
 
 let ffmpeg = null;
 
