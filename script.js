@@ -13,71 +13,46 @@ const textLayer = document.getElementById("textLayer");
 
 let selectedFile = null;
 
-videoInput.addEventListener("change", function (event) {
-
+videoInput.addEventListener("change", (event) => {
     selectedFile = event.target.files[0];
 
     if (selectedFile) {
+        fileName.textContent = "الفيديو المختار: " + selectedFile.name;
+        status.textContent = "تم اختيار الفيديو بنجاح";
 
-        fileName.textContent =
-            "الفيديو المختار: " + selectedFile.name;
-
-        status.textContent =
-            "تم اختيار الفيديو بنجاح";
-
-        const videoURL = URL.createObjectURL(selectedFile);
-
-        videoPreview.src = videoURL;
+        const url = URL.createObjectURL(selectedFile);
+        videoPreview.src = url;
         videoPreview.controls = true;
-
-    } else {
-
-        status.textContent =
-            "لم يتم اختيار ملف";
-
     }
-
 });
 
-addTextBtn.addEventListener("click", function () {
-
+addTextBtn.addEventListener("click", () => {
     if (textInput.value.trim() === "") {
-
         textLayer.style.display = "none";
         return;
-
     }
 
     textLayer.textContent = textInput.value;
     textLayer.style.display = "block";
-
 });
 
-processBtn.addEventListener("click", async function () {
-
+processBtn.addEventListener("click", async () => {
     if (!selectedFile) {
-
-        status.textContent = "اختر فيديو أولًا";
+        status.textContent = "اختر فيديو أولاً";
         return;
-
     }
 
     try {
-
-        status.textContent = "جاري تحميل محرك الكلام...";
-
+        status.textContent = "تحميل محرك الكلام...";
         await loadSpeechEngine(status);
 
-        status.textContent = "جاري استخراج الصوت...";
-
+        status.textContent = "استخراج الصوت...";
         await extractAudio(selectedFile);
 
         status.textContent = "تم استخراج الصوت بنجاح";
-
     } catch (error) {
-
+        console.error(error);
+        alert(error.message);
         status.textContent = error.message;
-
     }
-
 });
