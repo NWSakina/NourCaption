@@ -131,3 +131,43 @@ https://unpkg.com/@ffmpeg/ffmpeg@0.12.10/dist/esm/worker.js
 2. يتم استخراج الصوت من الفيديو.
 3. ينتج ملف WAV داخل التطبيق.
 4. لا يظهر أي خطأ متعلق بـ Worker أو unpkg.
+## Checkpoint 1 – FFmpeg Local Setup
+
+**Date:** 2026-07-23
+
+### Completed
+- GitHub Pages configured and project published.
+- Created `ffmpeg/` folder.
+- Added:
+  - `ffmpeg-core.js`
+  - `ffmpeg-core.wasm`
+  - `worker.js`
+- Created `ffmpeg-lib/`.
+- Copied all JavaScript files from:
+  `node_modules/@ffmpeg/ffmpeg/dist/esm/`
+- Updated `ffmpeg.js`:
+  - Replaced CDN import:
+    `https://unpkg.com/@ffmpeg/ffmpeg/...`
+  - With local import:
+    `./ffmpeg-lib/index.js`
+- All changes committed and pushed to GitHub.
+
+### Current Status
+- Old setup phase is finished.
+- Do **not** repeat creation of `ffmpeg/` or `ffmpeg-lib/`.
+- Do **not** modify `ffmpeg.js` again unless a new issue is confirmed.
+
+### Current Issue
+The application no longer stops at the original Worker setup phase.
+
+The remaining task is to inspect:
+
+`ffmpeg-lib/index.js`
+
+and verify whether it still contains references to `unpkg` or any external dependency that prevents `ffmpeg.load()` from completing successfully.
+
+### Next Session
+1. Open `NourCaption_Project_Status.md`.
+2. Continue from this checkpoint.
+3. Inspect `ffmpeg-lib/index.js`.
+4. Only after fixing it, test the application again.
